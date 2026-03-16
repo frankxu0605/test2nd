@@ -1,0 +1,23 @@
+name: Deploy Web Client to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'loan_manager/web_client/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 6d219c06399b2e032406496b1c44b73e
+          command: pages deploy loan_manager/web_client --project-name=loan-manager-web --commit-dirty=true
