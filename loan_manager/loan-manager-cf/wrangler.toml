@@ -1,0 +1,14 @@
+name = "loan-manager-api"
+main = "src/index.ts"
+compatibility_date = "2025-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+[triggers]
+crons = ["*/10 * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "loan-manager"
+database_id = "3a835e6e-38b2-4ac5-9437-94b9cbaf82b5"
+
+# JWT_SECRET is set via `wrangler secret put JWT_SECRET`

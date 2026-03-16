@@ -1,0 +1,40 @@
+{
+    "name": "黄金分期管理系统",
+    "appid": "__UNI__HJFQGOLD",
+    "description": "黄金分期管理系统",
+    "versionName": "1.0.0",
+    "versionCode": "100",
+    "transformPx": false,
+    "app-plus": {
+        "usingComponents": true,
+        "splashscreen": {
+            "alwaysShowBeforeRender": false,
+            "autoclose": true,
+            "waiting": true
+        },
+        "modules": {},
+        "distribute": {
+            "android": {
+                "permissions": [
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>"
+                ],
+                "minSdkVersion": 21,
+                "targetSdkVersion": 30,
+                "abiFilters": ["armeabi-v7a", "arm64-v8a"]
+            },
+            "ios": {},
+            "sdkConfigs": {}
+        }
+    },
+    "quickapp": {},
+    "mp-weixin": {},
+    "h5": {
+        "devServer": {
+            "port": 8080
+        },
+        "title": "黄金分期管理系统"
+    }
+}

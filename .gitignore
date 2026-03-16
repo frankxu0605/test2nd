@@ -1,0 +1,29 @@
+# Android build artifacts
+loan_manager/.buildozer/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Database files
+loan_manager/*.db
+loan_manager/*.db-shm
+loan_manager/*.db-wal
+loan_manager/*_backup*.db
+
+# Logs
+loan_manager/server.log
+loan_manager/nohup.out
+
+# Node modules
+node_modules/
+
+# Environment
+.env
+.env.*
+
+# OS
+.DS_Store
