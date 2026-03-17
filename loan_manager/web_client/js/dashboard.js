@@ -73,6 +73,8 @@ const DashboardPage = {
     async loadData() {
         // Skip if dashboard DOM elements no longer exist
         if (!document.getElementById('stat-grid')) return;
+        // Skip if not authenticated
+        if (!API.token) return;
         try {
             const data = await API.dashboard();
             // Gold price
