@@ -94,6 +94,8 @@ class Order(Base):
     lawsuit_filed: Mapped[bool] = mapped_column(default=False)
     lawsuit_fee: Mapped[Decimal] = mapped_column(DECIMAL(12, 2), default=Decimal("0.00"))
     lawsuit_filed_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
+    overdue_reported: Mapped[bool] = mapped_column(default=False)
+    overdue_reported_at: Mapped[datetime | None] = mapped_column(DateTime, nullable=True)
     manager_commission_paid: Mapped[bool] = mapped_column(Boolean, default=False)
     operator_commission_paid: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
