@@ -107,6 +107,7 @@ const CrudPage = {
                 : await API.list(config.apiModule, params);
             if (config.transformData) items = config.transformData(items);
             this.currentData = items;
+            this.totalItems = items.length + (this.currentPage - 1) * this.currentPageSize;
             this.renderTable(items);
             
             // Update pagination UI
