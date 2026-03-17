@@ -37,6 +37,7 @@ const CrudPage = {
                     <span id="crud-page-info">第 1 页，共 0 页</span>
                     <button class="btn btn-sm" id="crud-page-next" disabled>下一页</button>
                     <select id="crud-page-size" style="margin-left:10px;">
+                        <option value="30" selected>30条/页</option>
                         <option value="100">100条/页</option>
                         <option value="-1">全部</option>
                     </select>
@@ -91,7 +92,7 @@ const CrudPage = {
 
         // Add pagination params
         if (config.paginate) {
-            this.currentPageSize = parseInt(document.getElementById('crud-page-size')?.value || '100');
+            this.currentPageSize = parseInt(document.getElementById('crud-page-size')?.value || '30');
             if (this.currentPageSize === -1) {
                 params.skip = 0;
                 params.limit = -1;
