@@ -1,7 +1,7 @@
 from datetime import datetime, date, time
 from decimal import Decimal
 
-from sqlalchemy import String, Integer, Text, Date, Time, DateTime, ForeignKey, DECIMAL, Boolean
+from sqlalchemy import String, Integer, Text, Date, Time, DateTime, ForeignKey, DECIMAL, Boolean, Float
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .database import Base
@@ -275,3 +275,19 @@ class DeliveryAddress(Base):
     tenant_id: Mapped[int | None] = mapped_column(Integer, ForeignKey("tenants.id"), nullable=True)
     label: Mapped[str] = mapped_column(String(50), default="")
     address: Mapped[str] = mapped_column(String(200), default="")
+
+
+class OverduePool(Base):
+    __tablename__ = "overdue_pool"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    tenant_id: Mapped[int] = mapped_column(Integer, ForeignKey("tenants.id"), nullable=False)
+    customer_name: Mapped[str] = mapped_column(String(50), nullable=False)
+    id_card: Mapped[str] = mapped_column(String(18), default="")
+    phone: Mapped[str] = mapped_column(String(20), default="")
+    address: Mapped[str] = mapped_column(String(255), default="")
+    overdue_amount: Mapped[float] = mapped_column(Float, default=0.0)
+    overdue_periods: Mapped[int] = mapped_column(Integer, default=0)
+    overdue_date: Mapped[str] = mapped_column(String(10), default="")
+    notes: Mapped[str] = mapped_column(String(500), default="")
+    reported_by: Mapped[str] = mapped_column(String(100), default="")
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)

@@ -13,9 +13,9 @@ from .config import SERVER_HOST, SERVER_PORT
 from .database import Base, engine, get_db
 from .models import (
     Customer, Order, RepaymentPlan, Appointment, Expense,
-    GoldPrice, WarehouseEntry, SystemSetting, Tenant, User,
+    GoldPrice, WarehouseEntry, SystemSetting, Tenant, User, OverduePool,
 )
-from .routers import auth, customers, orders, repayments, warehouse, inventory, appointments, expenses, gold_price, settings, import_excel, payments, company_info
+from .routers import auth, customers, orders, repayments, warehouse, inventory, appointments, expenses, gold_price, settings, import_excel, payments, company_info, overdue_pool
 from .routers.auth import hash_password
 from .routers.repayments import auto_sync_overdue
 from .auth_deps import get_active_user
@@ -62,6 +62,7 @@ app.include_router(settings.router)
 app.include_router(import_excel.router)
 app.include_router(payments.router)
 app.include_router(company_info.router)
+app.include_router(overdue_pool.router)
 
 
 # Auto gold price fetcher (every 10 minutes)
