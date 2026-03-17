@@ -36,6 +36,8 @@ def _add_column_if_missing(table: str, column: str, col_def: str):
 _add_column_if_missing("orders", "operator", "VARCHAR(50) NOT NULL DEFAULT ''")
 _add_column_if_missing("orders", "manager_commission_paid", "BOOLEAN NOT NULL DEFAULT 0")
 _add_column_if_missing("orders", "operator_commission_paid", "BOOLEAN NOT NULL DEFAULT 0")
+_add_column_if_missing("orders", "overdue_reported", "BOOLEAN NOT NULL DEFAULT 0")
+_add_column_if_missing("orders", "overdue_reported_at", "VARCHAR(20) DEFAULT NULL")
 
 app = FastAPI(title="黄金分期管理系统", version="2.0.0")
 

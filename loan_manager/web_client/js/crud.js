@@ -776,10 +776,12 @@ const PAGE_CONFIGS = {
                 const lawsuitBtn = item.lawsuit_filed
                     ? `<span class="status-badge red" style="cursor:pointer;font-size:12px;" title="${item.lawsuit_filed_at ? '起诉时间: ' + item.lawsuit_filed_at : ''}" onclick="PAGE_CONFIGS.repayments.lawsuit(${item.order_id})">已起诉${item.lawsuit_filed_at ? '<br><span style="font-size:10px;opacity:0.8;">' + item.lawsuit_filed_at + '</span>' : ''}</span>`
                     : `<button class="btn btn-sm" style="background:#e53935;color:#fff;" onclick="PAGE_CONFIGS.repayments.lawsuit(${item.order_id})">起诉</button>`;
+                const overdueBtn = item.overdue_reported
+                    ? `<span class="status-badge purple" style="cursor:pointer;font-size:12px;" title="${item.overdue_reported_at ? '上报时间: ' + item.overdue_reported_at : ''}" onclick="PAGE_CONFIGS.repayments.reportOverdue(${item.order_id})">已上报公共池${item.overdue_reported_at ? '<br><span style="font-size:10px;opacity:0.8;">' + item.overdue_reported_at + '</span>' : ''}</span>`
+                    : `<button class="btn btn-sm" style="background:#6a1b9a;color:#fff;" onclick="PAGE_CONFIGS.repayments.reportOverdue(${item.order_id})">上报公共池</button>`;
                 return `<tr>${cells}<td class="actions">
                     <button class="btn btn-sm btn-primary" onclick="PAGE_CONFIGS.repayments.openDetail(${item.order_id})">还款明细</button>
-                    ${creditBtn} ${lawsuitBtn}
-                    <button class="btn btn-sm" style="background:#6a1b9a;color:#fff;" onclick="PAGE_CONFIGS.repayments.reportOverdue(${item.order_id})">上报公共池</button>
+                    ${creditBtn} ${lawsuitBtn} ${overdueBtn}
                     <button class="btn btn-sm btn-danger" onclick="PAGE_CONFIGS.repayments.deleteAll(${item.order_id})">删除</button>
                 </td></tr>`;
             }).join('');
@@ -1079,8 +1081,10 @@ const PAGE_CONFIGS = {
                 if (!data.customer_name) { Toast.show('请填写客户姓名', 'error'); return; }
                 try {
                     await API.create('overdue-pool', data);
+                    await API.update('orders', orderId, { overdue_reported: true, overdue_reported_at: new Date().toISOString().slice(0, 19).replace('T', ' ') });
                     Toast.show('已上报至逾期公共池', 'success');
                     Modal.close();
+                    CrudPage.loadData();
                 } catch (e) { Toast.show('上报失败: ' + e.message, 'error'); }
             });
         },
