@@ -1074,7 +1074,7 @@ const PAGE_CONFIGS = {
                     overdue_periods: document.getElementById('rp-od-periods').value,
                     overdue_date: document.getElementById('rp-od-date').value,
                     notes: document.getElementById('rp-od-notes').value,
-                    reported_by: API.userInfo?.tenant?.name || API.userInfo?.real_name || '',
+                    reported_by: API.tenantInfo?.name || API.userInfo?.real_name || '',
                 };
                 if (!data.customer_name) { Toast.show('请填写客户姓名', 'error'); return; }
                 try {
