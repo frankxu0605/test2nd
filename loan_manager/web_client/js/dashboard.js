@@ -398,8 +398,8 @@ const DashboardPage = {
     },
 
     showTransferModal(acctRows) {
-        const accounts = acctRows.map(a => a.account);
-        const options = accounts.map(a => `<option value="${this._escHtml(a)}">`).join('');
+        const allAccounts = CompanyInfo.paymentOptions();
+        const options = allAccounts.map(a => `<option value="${this._escHtml(a)}">`).join('');
         const now = new Date();
         const nowStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0') + 'T' + String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0');
         const overlay = document.createElement('div');
