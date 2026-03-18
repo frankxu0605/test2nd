@@ -730,7 +730,24 @@ const PAGE_CONFIGS = {
 
         customLoad(params) {
             // Use the summary endpoint: one row per order, much faster than loading all periods
-            return API.repaymentsSummary(params);
+            return API.repaymentsSummary(params).then(async data => {
+                // Get overdue pool data to check which orders are already reported
+                try {
+                    const poolData = await API.list('overdue-pool');
+                    const reportedOrderNos = new Set(poolData.map(item => item.notes?.match(/订单号:\s*(\S+)/)?.[1]).filter(Boolean));
+
+                    // Mark orders as reported if they exist in overdue pool
+                    data.forEach(item => {
+                        if (reportedOrderNos.has(item.order_no)) {
+                            item.overdue_reported = true;
+                            item.overdue_reported_at = '已上报';
+                        }
+                    });
+                } catch (e) {
+                    console.warn('Failed to load overdue pool data:', e);
+                }
+                return data;
+            });
         },
 
         transformData(items) {
