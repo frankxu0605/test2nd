@@ -718,8 +718,8 @@ const PAGE_CONFIGS = {
         columns: [
             { label: '序号', key: '_rowNum' },
             { label: '客户', key: 'customer_name' },
-            { label: '订单号', key: 'order_no' },
-            { label: '总额', key: 'order_total_price' },
+            { label: '订单号', key: 'order_no', width: '120px' },
+            { label: '总额', key: 'order_total_price', width: '80px' },
             { label: '已还', key: 'paid_total' },
             { label: '进度', key: 'progress' },
             { label: '回款率', key: 'repayment_rate' },
