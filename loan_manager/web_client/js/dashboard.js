@@ -130,12 +130,14 @@ const DashboardPage = {
             const todos = data.daily_todos || [];
             this._dailyTodos = todos;
             const todoCount = todos.length;
-            grid.innerHTML += `
+            if (grid) {
+                grid.innerHTML += `
                 <div class="stat-card" id="stat-daily-todo" style="background:linear-gradient(135deg, #e53935, #ff6b6b);cursor:pointer;">
                     <div class="stat-card-title">今日待办</div>
                     <div><span class="stat-card-value">${todoCount}</span><span class="stat-card-unit">笔</span></div>
                 </div>
             `;
+            }
             document.getElementById('stat-daily-todo').onclick = () => this.showDailyTodoModal();
 
             // Finance detail section
