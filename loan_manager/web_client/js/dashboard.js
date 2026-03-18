@@ -138,7 +138,8 @@ const DashboardPage = {
                 </div>
             `;
             }
-            document.getElementById('stat-daily-todo').onclick = () => this.showDailyTodoModal();
+            const dailyTodoBtn = document.getElementById('stat-daily-todo');
+            if (dailyTodoBtn) dailyTodoBtn.onclick = () => this.showDailyTodoModal();
 
             // Finance detail section
             const inc = data.income || {};
