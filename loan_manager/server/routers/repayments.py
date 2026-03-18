@@ -149,6 +149,8 @@ def list_repayments_summary(
             "credit_reported_at": o.credit_reported_at.strftime("%Y-%m-%d %H:%M") if o.credit_reported_at else None,
             "lawsuit_filed": o.lawsuit_filed,
             "lawsuit_filed_at": o.lawsuit_filed_at.strftime("%Y-%m-%d %H:%M") if o.lawsuit_filed_at else None,
+            "overdue_reported": o.overdue_reported,
+            "overdue_reported_at": o.overdue_reported_at.strftime("%Y-%m-%d %H:%M") if o.overdue_reported_at else None,
             "total_periods": s.total_periods,
             "installment_total": round(float(s.installment_total or 0), 2),
             "paid_total": round(float(s.paid_total or 0), 2),
