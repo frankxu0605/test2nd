@@ -117,12 +117,14 @@ const DashboardPage = {
                 { title: '待处理预约', value: data.pending_appointments, unit: '个', bg: 'linear-gradient(135deg, #00b4d8, #48cae4)' },
             ];
             const grid = document.getElementById('stat-grid');
-            grid.innerHTML = stats.map(s => `
-                <div class="stat-card" style="background:${s.bg}">
-                    <div class="stat-card-title">${s.title}</div>
-                    <div><span class="stat-card-value">${s.value}</span><span class="stat-card-unit">${s.unit}</span></div>
-                </div>
-            `).join('');
+            if (grid) {
+                grid.innerHTML = stats.map(s => `
+                    <div class="stat-card" style="background:${s.bg}">
+                        <div class="stat-card-title">${s.title}</div>
+                        <div><span class="stat-card-value">${s.value}</span><span class="stat-card-unit">${s.unit}</span></div>
+                    </div>
+                `).join('');
+            }
 
             // Daily todos - add as 7th stat card
             const todos = data.daily_todos || [];
@@ -160,7 +162,8 @@ const DashboardPage = {
             const rpColor = rpRate >= 80 ? '#67c23a' : rpRate >= 50 ? '#e6a23c' : '#ff4757';
 
             const fin = document.getElementById('finance-section');
-            fin.innerHTML = `
+            if (fin) {
+                fin.innerHTML = `
                 <div class="finance-net-row" style="display:flex;gap:16px;">
                     <div class="finance-net-card" style="flex:1;">
                         <div class="fd-title">净利润</div>
@@ -223,6 +226,7 @@ const DashboardPage = {
                     </div>
                 </div>
             `;
+            }
 
             // Invest edit toggle
             const editBtn = document.getElementById('invest-edit-btn');
