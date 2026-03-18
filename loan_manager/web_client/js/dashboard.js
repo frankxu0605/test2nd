@@ -83,18 +83,28 @@ const DashboardPage = {
                 const buyPrice = Number(gp.buy_price);
                 const sellPrice = Number(gp.sell_price);
                 const retailPrice = (buyPrice * 1.03 * 1.2).toFixed(2);
-                document.getElementById('gold-buy').textContent = `¥${buyPrice.toFixed(2)}`;
-                document.getElementById('gold-sell').textContent = `¥${sellPrice.toFixed(2)}/g`;
-                document.getElementById('gold-retail').textContent = `¥${retailPrice} /g`;
-                document.getElementById('gold-date').textContent = `更新: ${gp.price_date}`;
+                const goldBuy = document.getElementById('gold-buy');
+                const goldSell = document.getElementById('gold-sell');
+                const goldRetail = document.getElementById('gold-retail');
+                const goldDate = document.getElementById('gold-date');
+                const goldSource = document.getElementById('gold-source');
+                if (goldBuy) goldBuy.textContent = `¥${buyPrice.toFixed(2)}`;
+                if (goldSell) goldSell.textContent = `¥${sellPrice.toFixed(2)}/g`;
+                if (goldRetail) goldRetail.textContent = `¥${retailPrice} /g`;
+                if (goldDate) goldDate.textContent = `更新: ${gp.price_date}`;
                 const src = gp.updated_by === '自动获取' ? '🔄 实时自动' : (gp.updated_by ? `✏️ ${gp.updated_by}` : '');
-                document.getElementById('gold-source').textContent = src;
+                if (goldSource) goldSource.textContent = src;
             } else {
-                document.getElementById('gold-buy').textContent = '暂无报价';
-                document.getElementById('gold-sell').textContent = '--';
-                document.getElementById('gold-retail').textContent = '--';
-                document.getElementById('gold-date').textContent = '请设置今日金价';
-                document.getElementById('gold-source').textContent = '';
+                const goldBuy = document.getElementById('gold-buy');
+                const goldSell = document.getElementById('gold-sell');
+                const goldRetail = document.getElementById('gold-retail');
+                const goldDate = document.getElementById('gold-date');
+                const goldSource = document.getElementById('gold-source');
+                if (goldBuy) goldBuy.textContent = '暂无报价';
+                if (goldSell) goldSell.textContent = '--';
+                if (goldRetail) goldRetail.textContent = '--';
+                if (goldDate) goldDate.textContent = '请设置今日金价';
+                if (goldSource) goldSource.textContent = '';
             }
 
             // Stat cards
