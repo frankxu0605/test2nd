@@ -1051,6 +1051,10 @@ const PAGE_CONFIGS = {
         reportOverdue(orderId) {
             const item = CrudPage.currentData.find(d => d.order_id === orderId);
             if (!item) return;
+            if (item.overdue_reported) {
+                Toast.show('该订单已上报过公共池', 'warning');
+                return;
+            }
             const unpaidAmount = Math.max(0, Math.round((item.installment_total || 0) - (item.paid_total || 0)));
             const totalPeriods = item.total_periods || 0;
             const paidCount = item.paid_count || 0;
