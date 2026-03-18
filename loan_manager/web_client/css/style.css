@@ -1079,6 +1079,7 @@ input, select, textarea { font-family: inherit; font-size: inherit; }
 
 /* Table horizontal scroll */
 .table-scroll { overflow-x: auto; }
+.crud-table { min-width: 1200px; }
 
 /* ===== Login Toggle & Register Form ===== */
 .login-toggle {
