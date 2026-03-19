@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { drizzle } from 'drizzle-orm/d1';
 import { eq, and, like, or, sql, desc } from 'drizzle-orm';
-import { overdueReports } from '../db/schema';
+import { overdueReports, tenants } from '../db/schema';
 import { authMiddleware } from '../middleware/auth';
 import type { Env } from '../lib/types';
 
@@ -76,6 +76,9 @@ route.post('/', async (c) => {
   const body = await c.req.json();
   const db = drizzle(c.env.DB);
 
+  const tenant = await db.select().from(tenants).where(eq(tenants.id, user.tenantId!)).get();
+  const reportedBy = tenant?.name || user.realName || user.username || '未知';
+
   const result = await db.insert(overdueReports).values({
     customerName: body.customer_name || '',
     idCard: body.id_card || '',
@@ -85,7 +88,7 @@ route.post('/', async (c) => {
     overduePeriods: parseInt(body.overdue_periods) || 0,
     overdueDate: body.overdue_date || '',
     notes: body.notes || '',
-    reportedBy: user.realName || user.username,
+    reportedBy,
     tenantId: user.tenantId,
   }).returning();
   return c.json(entityOut(result[0]));
